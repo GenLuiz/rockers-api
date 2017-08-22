@@ -1,5 +1,5 @@
 package com.rockers.api.model;
-import java.util.Set;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -7,5 +7,5 @@ public class Team {
 
 	private String id;
 	private String name;
-	private Set<Employee> employees;
+	private List<Employee> employees;
 }

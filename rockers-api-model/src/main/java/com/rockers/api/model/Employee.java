@@ -11,6 +11,5 @@ public class Employee {
 	private String wiproEmail;
 	private User user;
 	private Contract contract;
-	private Team team;
 	
 }
