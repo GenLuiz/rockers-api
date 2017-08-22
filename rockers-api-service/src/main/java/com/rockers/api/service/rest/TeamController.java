@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,14 +31,14 @@ public class TeamController {
 		return new ResponseEntity<List<Team>>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/find")
-	public ResponseEntity<Team> findTeam(@RequestBody String id){
+	@RequestMapping(method=RequestMethod.POST, value="/find/{id}")
+	public ResponseEntity<Team> findTeam(@PathVariable String id){
 		Team team = dao.findOne(id);
 		return new ResponseEntity<Team>(team,HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/delete")
-	public ResponseEntity<String> deleteTeam(@RequestBody String id){
+	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
+	public ResponseEntity<String> deleteTeam(@PathVariable String id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}

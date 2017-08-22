@@ -15,7 +15,7 @@ public class UserDao implements Crud<User> {
 	@Override
 	public String save(User t) {
 		// TODO Auto-generated method stub
-		if(t.getId().equals(null)){
+		if(t.getId()== null){
 			return "User Save";
 		}else{
 			return "User Update";

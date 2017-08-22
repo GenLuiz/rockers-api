@@ -3,6 +3,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,14 +31,14 @@ public class UserController {
 		return new ResponseEntity<List<User>>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/find")
-	public ResponseEntity<User> findUser(@RequestBody String id){
+	@RequestMapping(method=RequestMethod.GET,value="/find/{id}")
+	public ResponseEntity<User> findUser(@PathVariable String id){
 		User user = dao.findOne(id);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/delete")
-	public ResponseEntity<String> deleteUser(@RequestBody String id){
+	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable String id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}

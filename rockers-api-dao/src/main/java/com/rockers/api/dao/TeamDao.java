@@ -1,8 +1,9 @@
 package com.rockers.api.dao;
 import java.util.List;
-
+import org.springframework.stereotype.Component;
 import com.rockers.api.model.Team;
 
+@Component
 public class TeamDao implements Crud<Team>{
 
 	@Override
@@ -14,7 +15,7 @@ public class TeamDao implements Crud<Team>{
 	@Override
 	public String save(Team t) {
 		// TODO Auto-generated method stub
-		if(t.getId().equals(null)){
+		if(t.getId()== null){
 			return "team Save";
 		}else{
 			return "team Update";

@@ -1,8 +1,9 @@
 package com.rockers.api.dao;
 import java.util.List;
-
+import org.springframework.stereotype.Component;
 import com.rockers.api.model.Employee;
 
+@Component
 public class EmployeeDao implements Crud<Employee>{
 
 	@Override
@@ -14,7 +15,11 @@ public class EmployeeDao implements Crud<Employee>{
 	@Override
 	public String save(Employee t) {
 		// TODO Auto-generated method stub
-		return null;
+		if(t.getId()== null){
+			return "Employee save";
+		}else{
+			return "Employee update";
+		}
 	}
 
 	@Override
