@@ -49,5 +49,10 @@ public class UserDao implements Crud<User> {
 		
 	}
 
+	public String login(User user) {
+		// TODO Auto-generated method stub
+		return "Success";
+	}
+
 
 }

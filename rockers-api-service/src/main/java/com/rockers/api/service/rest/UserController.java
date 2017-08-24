@@ -42,4 +42,10 @@ public class UserController {
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/login")
+	public ResponseEntity<String> loginUser(@RequestBody User user){
+		String response = dao.login(user);
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+	}
 }
