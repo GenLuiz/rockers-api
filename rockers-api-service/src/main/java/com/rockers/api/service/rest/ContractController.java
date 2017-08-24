@@ -31,13 +31,13 @@ public class ContractController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/find/{id}")
-	public ResponseEntity<Contract> findContract(@PathVariable String id){
+	public ResponseEntity<Contract> findContract(@PathVariable Long id){
 		Contract contract = dao.findOne(id);
 		return new ResponseEntity<Contract>(contract, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{id}")
-	public ResponseEntity<String> deleteContract(@PathVariable String id){
+	public ResponseEntity<String> deleteContract(@PathVariable Long id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}

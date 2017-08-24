@@ -34,13 +34,13 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/find/{id}")
-	public ResponseEntity<Employee> findEmployee(@PathVariable String id){
+	public ResponseEntity<Employee> findEmployee(@PathVariable Long id){
 		Employee employee = dao.findOne(id);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
-	public ResponseEntity<String> deleteEmployee(@PathVariable String id){
+	public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}

@@ -1,24 +1,30 @@
 package com.rockers.api.dao;
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.rockers.api.model.User;
+import com.rockers.api.repository.IUserRepository;
 
 @Component
 public class UserDao implements Crud<User> {
 
+	@Autowired
+	IUserRepository userRepository;
+	
 	@Override
-	public User findOne(String id) {
+	public User findOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findOne(id);
 	}
 
 	@Override
 	public String save(User t) {
 		// TODO Auto-generated method stub
 		if(t.getId()== null){
+			userRepository.save(t);
 			return "User Save";
 		}else{
+			userRepository.save(t);
 			return "User Update";
 		}
 	}
@@ -26,33 +32,18 @@ public class UserDao implements Crud<User> {
 	@Override
 	public List<User> listAll() {
 		// TODO Auto-generated method stub
-		List<User> listUser = new ArrayList<User>();
-		
-		User usuario1 = new User();
-		usuario1.setId("1");
-		usuario1.setLogin("123@123.com");
-		usuario1.setPassword("1234");
-		listUser.add(usuario1);
-		
-		User usuario2 = new User();
-		usuario2.setId("2");
-		usuario2.setLogin("1234@1234.com");
-		usuario2.setPassword("1234");
-		listUser.add(usuario2);
-		
-		return listUser;
+		return userRepository.findAll();
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		
+		User user = userRepository.findOne(id);
+		userRepository.delete(user);
 	}
 
 	public String login(User user) {
 		// TODO Auto-generated method stub
 		return "Success";
 	}
-
-
 }

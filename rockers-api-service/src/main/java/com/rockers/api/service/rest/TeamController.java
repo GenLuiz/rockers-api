@@ -32,13 +32,13 @@ public class TeamController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/find/{id}")
-	public ResponseEntity<Team> findTeam(@PathVariable String id){
+	public ResponseEntity<Team> findTeam(@PathVariable Long id){
 		Team team = dao.findOne(id);
 		return new ResponseEntity<Team>(team,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
-	public ResponseEntity<String> deleteTeam(@PathVariable String id){
+	public ResponseEntity<String> deleteTeam(@PathVariable Long id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}

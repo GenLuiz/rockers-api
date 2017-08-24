@@ -1,25 +1,30 @@
 package com.rockers.api.dao;
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.rockers.api.model.Contract;
-import com.rockers.api.model.User;
+import com.rockers.api.repository.IContractRepository;
 
 @Component
 public class ContractDao implements Crud<Contract> {
 
+	@Autowired
+	IContractRepository contractRepository;
+	
 	@Override
-	public Contract findOne(String id) {
+	public Contract findOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return contractRepository.findOne(id);
 	}
 
 	@Override
 	public String save(Contract t) {
 		// TODO Auto-generated method stub
 		if(t.getId()== null){
-			return "contract Save";
+			contractRepository.save(t);
+			return "Contract Save";
 		}else{
+			contractRepository.save(t);
 			return "contract Update";
 		}
 	}
@@ -27,32 +32,14 @@ public class ContractDao implements Crud<Contract> {
 	@Override
 	public List<Contract> listAll() {
 		// TODO Auto-generated method stub
-		
-		UserDao dao = new UserDao();
-		List<User> listUser = dao.listAll();
-		
-		List<Contract> listContract = new ArrayList<Contract>();
-		
-		Contract contract1 = new Contract();
-		contract1.setId("1");
-		contract1.setName("CLT");
-		contract1.setUser(listUser.get(0));
-		listContract.add(contract1);
-		
-	
-		Contract contract2 = new Contract();
-		contract2.setId("2");
-		contract2.setName("PJ");
-		contract2.setUser(listUser.get(1));
-		listContract.add(contract2);
-		
-		return listContract;
+		return contractRepository.findAll();
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		
+		Contract contract = contractRepository.findOne(id);
+		contractRepository.delete(contract);
 	}
 
 }

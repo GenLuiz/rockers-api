@@ -1,25 +1,31 @@
 package com.rockers.api.dao;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.rockers.api.model.Employee;
 import com.rockers.api.model.Team;
+import com.rockers.api.repository.ITeamRepository;
 
 @Component
 public class TeamDao implements Crud<Team>{
 
+	@Autowired
+	ITeamRepository teamRepository; 
+	
 	@Override
-	public Team findOne(String id) {
+	public Team findOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return teamRepository.findOne(id);
 	}
 
 	@Override
 	public String save(Team t) {
 		// TODO Auto-generated method stub
 		if(t.getId()== null){
+			teamRepository.save(t);
 			return "team Save";
 		}else{
+			teamRepository.save(t);
 			return "team Update";
 		}
 	}
@@ -27,34 +33,14 @@ public class TeamDao implements Crud<Team>{
 	@Override
 	public List<Team> listAll() {
 		// TODO Auto-generated method stub
-		EmployeeDao dao = new EmployeeDao();
-		List<Employee> listEmployee = dao.listAll();
-		
-		List<Team> listTeam = new ArrayList<Team>();
-		
-		Team team1 = new Team();
-		team1.setId("1");
-		team1.setName("ESS");
-		team1.setEmployees(listEmployee);
-		listTeam.add(team1);
-		
-		Team team2 = new Team();
-		team2.setId("2");
-		team2.setName("NON-COMMERCIAL");
-		listTeam.add(team2);
-		
-		Team team3 = new Team();
-		team3.setId("3");
-		team3.setName("COMMERCIAL");
-		listTeam.add(team3);
-		
-		return listTeam;
+		return teamRepository.findAll();
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		
+		Team team = teamRepository.findOne(id);
+		teamRepository.delete(team);
 	}
 
 	

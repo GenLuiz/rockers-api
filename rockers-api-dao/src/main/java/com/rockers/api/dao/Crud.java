@@ -3,8 +3,8 @@ import java.util.List;
 
 public interface Crud<T extends Object> {
 
-	T findOne(String id);
+	T findOne(Long id);
 	String save(T t);
 	List<T> listAll();
-	void delete(String id);
+	void delete(Long id);
 }

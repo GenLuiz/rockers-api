@@ -32,13 +32,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/find/{id}")
-	public ResponseEntity<User> findUser(@PathVariable String id){
+	public ResponseEntity<User> findUser(@PathVariable Long id){
 		User user = dao.findOne(id);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable String id){
+	public ResponseEntity<String> deleteUser(@PathVariable Long id){
 		dao.delete(id);
 		return new ResponseEntity<String>("OK",HttpStatus.OK);
 	}

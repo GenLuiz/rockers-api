@@ -1,15 +1,35 @@
 package com.rockers.api.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Data;
 
 @Data
-public class Employee {
+@Entity
+@Table
+public class Employee extends BaseEntity{
 
-	private String id;
+	@Column(name="name", nullable=false, unique=false)
 	private String name;
+	
+	@Column(name="wipro_id", nullable=false, unique=true)
 	private String wiproId;
+	
+	@Column(name="client_id")
 	private String clientId;
+	
+	@Column(name="wipro_email", nullable=false, unique=true)
 	private String wiproEmail;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Team team;
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_id")
 	private User user;
-	private Contract contract;
 	
 }
