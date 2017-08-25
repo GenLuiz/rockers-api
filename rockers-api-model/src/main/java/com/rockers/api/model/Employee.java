@@ -1,4 +1,5 @@
 package com.rockers.api.model;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,10 +26,10 @@ public class Employee extends BaseEntity{
 	@Column(name="wipro_email", nullable=false, unique=true)
 	private String wiproEmail;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Team team;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private User user;
 	

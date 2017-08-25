@@ -17,9 +17,9 @@ public class Team extends BaseEntity{
 	@Column(name="name", nullable=false, unique=false)
 	private String name;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Contract contract;
 	
-	@OneToMany(mappedBy="team", fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Employee> listEmployees;
 }
