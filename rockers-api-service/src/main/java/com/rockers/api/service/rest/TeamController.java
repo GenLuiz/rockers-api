@@ -1,6 +1,5 @@
 package com.rockers.api.service.rest;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,25 +20,41 @@ public class TeamController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/save")
 	public ResponseEntity<String> saveTeam(@RequestBody Team team){
-		String response = dao.save(team);
+		String response = "";
+		try{
+			response = dao.save(team);
+		}catch(Exception e){
+			response = "Error occur";
+		}
 		return new ResponseEntity<String>(response,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	public ResponseEntity<List<Team>> listTeam(){
-		List<Team> response = dao.listAll();
+		List<Team> response =  null;
+		try{
+			 response = dao.listAll();
+		}catch(Exception e){}
 		return new ResponseEntity<List<Team>>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/find/{id}")
 	public ResponseEntity<Team> findTeam(@PathVariable Long id){
-		Team team = dao.findOne(id);
+		Team team = new Team();
+		try{
+			team = dao.findOne(id);
+		}catch(Exception e){}
 		return new ResponseEntity<Team>(team,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
 	public ResponseEntity<String> deleteTeam(@PathVariable Long id){
-		dao.delete(id);
-		return new ResponseEntity<String>("OK",HttpStatus.OK);
+		String response = "OK";
+		try{
+			dao.delete(id);
+		}catch(Exception e){
+			response = "Error";
+		}
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 }

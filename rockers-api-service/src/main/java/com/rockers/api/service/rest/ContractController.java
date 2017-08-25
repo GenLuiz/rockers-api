@@ -18,28 +18,50 @@ public class ContractController {
 	@Autowired
 	private ContractDao dao;
 	
+	
 	@RequestMapping(method=RequestMethod.POST,value="/save")
 	public ResponseEntity<String> saveContract(@RequestBody Contract contract){
-		String response = dao.save(contract);
+		String response = "";
+		try{
+			response = dao.save(contract);
+		}catch(Exception e){
+			response = "Error occur";
+		}
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/list")
 	public ResponseEntity<List<Contract>> listContract(){
-		List<Contract> response = dao.listAll();
+		List<Contract> response = null;
+		try{
+			 response = dao.listAll();
+		}catch(Exception e){
+			
+		}
 		return new ResponseEntity<List<Contract>>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/find/{id}")
 	public ResponseEntity<Contract> findContract(@PathVariable Long id){
-		Contract contract = dao.findOne(id);
+		Contract contract = new Contract();
+		try{
+			contract = dao.findOne(id);
+		}catch(Exception e){}
+		 
 		return new ResponseEntity<Contract>(contract, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{id}")
 	public ResponseEntity<String> deleteContract(@PathVariable Long id){
-		dao.delete(id);
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
+		String response = "OK";
+		try{
+			dao.delete(id);
+			
+		}catch(Exception e){
+			response = "Error";
+		}
+		
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 }

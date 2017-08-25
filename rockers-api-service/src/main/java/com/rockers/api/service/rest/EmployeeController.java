@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.rockers.api.dao.EmployeeDao;
 import com.rockers.api.model.Employee;
 
@@ -23,25 +22,44 @@ public class EmployeeController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/save")
 	public ResponseEntity<String> saveEmployee(@RequestBody Employee employee){
-		String response = dao.save(employee);
+		String response = "";
+		try{
+			response = dao.save(employee);
+		}catch(Exception e){
+			response = "Error occur";
+		}
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	public ResponseEntity<List<Employee>> listEmployee(){
-		List<Employee> response = dao.listAll();
+		List<Employee> response =  null;
+		try{
+			 response = dao.listAll();
+		}catch(Exception e){}
+		
 		return new ResponseEntity<List<Employee>>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/find/{id}")
 	public ResponseEntity<Employee> findEmployee(@PathVariable Long id){
-		Employee employee = dao.findOne(id);
+		Employee employee = new Employee();
+		try{
+			employee = dao.findOne(id);
+		}catch(Exception e){}
+		
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
 	public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
-		dao.delete(id);
-		return new ResponseEntity<String>("OK",HttpStatus.OK);
+		String response = "OK";
+		try{
+			dao.delete(id);
+			
+		}catch(Exception e){
+			response = "Error";
+		}
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 }
