@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserDao dao;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/save")
+	@RequestMapping(method=RequestMethod.POST,value="")
 	public ResponseEntity<String> saveUser(@RequestBody User user){
 		String response = "";
 		try{
@@ -30,7 +30,7 @@ public class UserController {
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/list")
+	@RequestMapping(method=RequestMethod.GET,value="")
 	public ResponseEntity<List<User>> listUser(){
 		List<User> response =  null;
 		try{
@@ -39,7 +39,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/find/{id}")
+	@RequestMapping(method=RequestMethod.GET,value="/{id}")
 	public ResponseEntity<User> findUser(@PathVariable Long id){
 		User user = new User();
 		try{
@@ -48,7 +48,7 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{id}")
+	@RequestMapping(method=RequestMethod.DELETE,value="/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long id){
 		String response = "OK";
 		try{
