@@ -17,7 +17,7 @@
 	</properties>
 
 	<dependencies>
-
+	
 		<dependency>
 			<groupId>rockers-api</groupId>
 			<artifactId>rockers-api-model</artifactId>
@@ -30,6 +30,20 @@
 			<version>${rockers-api-version}</version>
 		</dependency>
 
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -50,7 +64,7 @@
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-releases</id>

@@ -4,4 +4,5 @@ import com.rockers.api.model.User;
 
 public interface IUserRepository extends JpaRepository<User, Long>{
 
+	
 }

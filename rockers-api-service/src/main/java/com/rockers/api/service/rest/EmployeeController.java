@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.rockers.api.dao.EmployeeDao;
 import com.rockers.api.model.Employee;
+import com.rockers.api.model.Message;
 
 
 @RestController
@@ -20,18 +21,29 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeDao dao;
 	
-	@RequestMapping(method=RequestMethod.POST, value="/save")
-	public ResponseEntity<String> saveEmployee(@RequestBody Employee employee){
+	@RequestMapping(method=RequestMethod.POST, value="")
+	public ResponseEntity<Message> saveEmployee(@RequestBody Employee employee){
 		String response = "";
 		try{
 			response = dao.save(employee);
 		}catch(Exception e){
 			response = "Error occur";
 		}
-		return new ResponseEntity<String>(response, HttpStatus.OK);
+		return new ResponseEntity<Message>(new Message(response), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/list")
+	@RequestMapping(method=RequestMethod.PUT, value="")
+	public ResponseEntity<Message> updateEmployee(@RequestBody Employee employee){
+		String response = "";
+		try{
+			response = dao.save(employee);
+		}catch(Exception e){
+			response = "Error occur";
+		}
+		return new ResponseEntity<Message>(new Message(response), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="")
 	public ResponseEntity<List<Employee>> listEmployee(){
 		List<Employee> response =  null;
 		try{
@@ -41,7 +53,7 @@ public class EmployeeController {
 		return new ResponseEntity<List<Employee>>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/find/{id}")
+	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ResponseEntity<Employee> findEmployee(@PathVariable Long id){
 		Employee employee = new Employee();
 		try{
@@ -51,15 +63,14 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/delete/{id}")
-	public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+	public ResponseEntity<Message> deleteEmployee(@PathVariable Long id){
 		String response = "OK";
 		try{
 			dao.delete(id);
-			
 		}catch(Exception e){
 			response = "Error";
 		}
-		return new ResponseEntity<String>(response, HttpStatus.OK);
+		return new ResponseEntity<Message>(new Message(response), HttpStatus.OK);
 	}
 }
