@@ -1,0 +1,4 @@
+com\rockers\api\repository\IUserRepository.class
+com\rockers\api\repository\IEmployeeRepository.class
+com\rockers\api\repository\ITeamRepository.class
+com\rockers\api\repository\IContractRepository.class

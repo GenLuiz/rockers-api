@@ -1,6 +1,5 @@
 package com.rockers.api.service.rest;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rockers.api.dao.EmployeeDao;
 import com.rockers.api.model.Employee;
 import com.rockers.api.model.Message;
-
 
 @RestController
 @RequestMapping("/employee")
