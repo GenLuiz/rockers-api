@@ -26,7 +26,7 @@ public class Employee extends BaseEntity{
 	@Column(name="wipro_email", nullable=false, unique=true)
 	private String wiproEmail;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Team team;
 	
 	@OneToOne(cascade=CascadeType.ALL)
